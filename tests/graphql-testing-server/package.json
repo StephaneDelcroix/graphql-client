@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json.schemastore.org/package",
+    "config": {
+        
+    },
+    "devDependencies": {
+        "@types/express-graphql": "^0.0.36",
+        "@types/node": "^9.4.6",
+        "express-graphql": "^0.6.11",
+        "tslint": "^5.9.1",
+        "typescript": "^2.7.1"
+    },
+    "engines": {
+        "node": ">=9.0.0",
+        "npm": ">=4.5.0"
+    },
+    "main": "./src/main.js",
+    "name": "graphql-testing-server",
+    "scripts": {
+        "build": "tsc && tslint --fix --project ./tsconfig.json",
+        "postinstall": "npm run build",
+        "start": "npm run build && node ./src/main.js"
+    },
+    "version": "1.0.0"
+}
