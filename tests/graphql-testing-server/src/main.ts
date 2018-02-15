@@ -3,9 +3,9 @@ const graphqlHTTP = require("express-graphql");
 
 const app = express();
 
-app.use("/graphql", graphqlHTTP({
+app.use(process.env.npm_package_config_graphql, graphqlHTTP({
   schema: MyGraphQLSchema,
   graphiql: true,
 }));
 
-app.listen(4000);
+app.listen(process.env.npm_package_config_port);
