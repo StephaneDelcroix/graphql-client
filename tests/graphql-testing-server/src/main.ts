@@ -1,10 +1,12 @@
+import { schema } from "./StarWarsSchema";
+
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
 
 const app = express();
 
 app.use(process.env.npm_package_config_graphql, graphqlHTTP({
-  schema: MyGraphQLSchema,
+  schema: schema,
   graphiql: true,
 }));
 

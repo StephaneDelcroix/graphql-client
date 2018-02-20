@@ -6,8 +6,10 @@
     },
     "devDependencies": {
         "@types/express-graphql": "^0.0.36",
+        "@types/graphql":"^0.12.4",
         "@types/node": "^9.4.6",
         "express-graphql": "^0.6.11",
+        "graphql":"^0.13.1",
         "tslint": "^5.9.1",
         "typescript": "^2.7.1"
     },
@@ -20,7 +22,8 @@
     "scripts": {
         "build": "tsc && tslint --fix --project ./tsconfig.json",
         "postinstall": "npm run build",
-        "start": "npm run build && node ./src/main.js"
+        "prestart": "npm run build",
+        "start": "node ./src/main.js"
     },
     "version": "1.0.0"
 }
