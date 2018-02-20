@@ -16,4 +16,5 @@ export class StarWarsSchema extends GraphQLSchema {
 			}),
 		});
 	}
+
 }

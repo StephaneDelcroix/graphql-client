@@ -5,6 +5,8 @@
 			"es6",
 			"esnext.asynciterable"
 		],
+		"module": "commonjs",
+		"strict": true,
 		"target": "es2015"
 	}
 }
