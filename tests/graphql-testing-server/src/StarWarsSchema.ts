@@ -1,15 +1,19 @@
-import {graphql, GraphQLSchema, GraphQLObjectType, GraphQLString} from "graphql";
-  
-export var schema = new GraphQLSchema({
-    query: new GraphQLObjectType({
-      name: 'RootQueryType',
-      fields: {
-        hello: {
-          type: GraphQLString,
-          resolve() {
-            return 'world';
-          }
-        }
-      }
-    })
-  });
+import {GraphQLObjectType, GraphQLSchema, GraphQLString} from "graphql";
+
+export class StarWarsSchema extends GraphQLSchema {
+
+	public constructor() {
+		super({
+			query: new GraphQLObjectType({
+				fields: {
+					hello: {
+						type: GraphQLString,
+						resolve() {
+							return "world";
+						},
+					},
+				}, name: "RootQueryType",
+			}),
+		});
+	}
+}

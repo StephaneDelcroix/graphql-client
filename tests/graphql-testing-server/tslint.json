@@ -1,4 +1,11 @@
 {
     "$schema": "http://json.schemastore.org/tslint",
-    "extends": "tslint:recommended"
+    "extends": "tslint:recommended",
+	"rules": {
+		"indent": [
+			"tabs",
+			true
+		],
+		"no-var-requires": false
+	}
 }
