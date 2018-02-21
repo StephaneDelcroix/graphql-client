@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using System.IO.Compression;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -76,6 +78,7 @@ namespace GraphQL.Client {
 			if (this.Options.MediaType == null) { throw new ArgumentNullException(nameof(this.Options.MediaType)); }
 
 			this.httpClient = new HttpClient(this.Options.HttpMessageHandler);
+			this.httpClient.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
 		}
 
 		/// <summary>
@@ -91,6 +94,7 @@ namespace GraphQL.Client {
 			if (this.Options.MediaType == null) { throw new ArgumentNullException(nameof(this.Options.MediaType)); }
 
 			this.httpClient = new HttpClient(this.Options.HttpMessageHandler);
+			this.httpClient.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
 		}
 
 		#endregion
@@ -162,7 +166,7 @@ namespace GraphQL.Client {
 		/// <param name="httpResponseMessage">The Response</param>
 		/// <returns>The GrahQLResponse</returns>
 		private async Task<GraphQLResponse> ReadHttpResponseMessageAsync(HttpResponseMessage httpResponseMessage) {
-			using (var stream = await httpResponseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false))
+			using (var stream = await this.DecompressHttpResponseMessageAsync(httpResponseMessage).ConfigureAwait(false))
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader)) {
 				var jsonSerializer = new JsonSerializer {
@@ -178,6 +182,16 @@ namespace GraphQL.Client {
 					throw new GraphQLHttpException(httpResponseMessage);
 				}
 			}
+		}
+
+		private async Task<Stream> DecompressHttpResponseMessageAsync(HttpResponseMessage httpResponseMessage) {
+			var stream = await httpResponseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false);
+			if (httpResponseMessage.Content.Headers.ContentEncoding.Any(x => x == "gzip")) {
+				using (var decompressed = new GZipStream(stream, CompressionMode.Decompress)) {
+					return decompressed;
+				}
+			}
+			return stream;
 		}
 
 	}
