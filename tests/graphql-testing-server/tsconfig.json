@@ -1,12 +1,8 @@
 {
     "$schema": "http://json.schemastore.org/tsconfig",
     "compilerOptions": {
-		"lib": [
-			"es6",
-			"esnext.asynciterable"
-		],
 		"module": "commonjs",
 		"strict": true,
-		"target": "es2015"
+		"target": "esnext"
 	}
 }
