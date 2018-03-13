@@ -2,6 +2,7 @@
     "$schema": "http://json.schemastore.org/tsconfig",
     "compilerOptions": {
 		"module": "commonjs",
+		"moduleResolution":"node",
 		"strict": true,
 		"target": "esnext"
 	}
