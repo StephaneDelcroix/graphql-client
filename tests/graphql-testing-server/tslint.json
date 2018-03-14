@@ -6,6 +6,7 @@
 			true,
 			"tabs"
 		],
+		"no-console": false,
 		"variable-name": false
 	}
 }
