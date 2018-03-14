@@ -1,4 +1,7 @@
-import {GraphQLFieldConfig, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLResolveInfo} from "graphql";
+import {
+	GraphQLFieldConfig, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLResolveInfo,
+	GraphQLString,
+} from "graphql";
 import {Person} from "../models/Person";
 import {FilmRepository} from "../repository/FilmRepository";
 import {PersonRepository} from "../repository/PersonRepository";
@@ -14,10 +17,16 @@ export default new GraphQLObjectType({
 			type: new GraphQLNonNull(new GraphQLList(FilmType)),
 		} as GraphQLFieldConfig<any, any>,
 		person: {
-			resolve: async (source, args, context, info: GraphQLResolveInfo) => {
-				return await new PersonRepository().getAllAsync();
+			args: {
+				personID: {
+					description: "The Id",
+					type: new GraphQLNonNull(GraphQLString),
+				},
 			},
-			type: new GraphQLNonNull(new GraphQLList(PersonType)),
+			resolve: async (source, args, context, info: GraphQLResolveInfo) => {
+				return await new PersonRepository().getByIdAsync(parseInt(args.personID, 10));
+			},
+			type: PersonType,
 		} as GraphQLFieldConfig<any, any>,
 	}),
 	name: "Query",

@@ -1,6 +1,6 @@
 export class Person {
 
-	public  personId: string | undefined;
+	public  personID: string | undefined;
 
 	public name: string | undefined;
 

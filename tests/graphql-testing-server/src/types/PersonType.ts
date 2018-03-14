@@ -6,7 +6,7 @@ export default new GraphQLObjectType({
 			description: "The name",
 			type: new GraphQLNonNull(GraphQLString),
 		},
-		personId: {
+		personID: {
 			description: "The Id",
 			type: new GraphQLNonNull(GraphQLString),
 		},

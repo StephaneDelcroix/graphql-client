@@ -6,13 +6,14 @@ export class PersonRepository {
 		return [
 			{
 				name: "Luke Skywalker",
-				personId: "1",
+				personID: "1",
 			},
 		];
 	}
 
 	public async getByIdAsync(id: number): Promise<Person> {
-		return (await this.getAllAsync())[0];
+		const all = await this.getAllAsync();
+		return all[id - 1];
 	}
 
 }
