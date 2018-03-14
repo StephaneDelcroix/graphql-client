@@ -1,24 +1,22 @@
 import {GraphQLObjectType, GraphQLObjectTypeConfig, GraphQLSchema, GraphQLString} from "graphql";
-import {FilmType} from "./types/FilmType";
+import FilmType from "./types/FilmType";
 
-export class StarWarsSchema extends GraphQLSchema {
-
-	private static readonly type: GraphQLObjectTypeConfig<any, any> = {
-		fields: {
-			film: {
-				type: GraphQLString,
-				resolve() {
-					return "world";
+const queryType = new GraphQLObjectType({
+	fields: () => ({
+		film: {
+			resolve: (root, { id }) => {
+				return {
+					episode_id: 1,
+					title: "a",
+				};
 				},
-			},
+			type: FilmType,
 		},
-		name: "Root",
-	};
+	}),
+	name: "Query",
+});
 
-	public constructor() {
-		super({
-			query: new GraphQLObjectType(StarWarsSchema.type),
-		});
-	}
-
-}
+export default new GraphQLSchema({
+	query: queryType,
+	types: [FilmType],
+});

@@ -6,6 +6,6 @@
 			true,
 			"tabs"
 		],
-		"no-var-requires": false
+		"variable-name": false
 	}
 }

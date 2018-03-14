@@ -4,7 +4,7 @@
         "graphql": "/api/graphql",
         "port": "4000"
     },
-    "description": "A copy of https://github.com/graphql/swapi-graphql with query, mutations and subscriptions",
+    "description": "A copy of https://github.com/graphql/swapi-graphql with query, mutations and subscriptions (https://swapi.co/)",
     "devDependencies": {
         "@types/express-graphql": "^0.0.36",
         "@types/graphql": "^0.12.4",

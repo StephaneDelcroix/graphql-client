@@ -1,21 +1,15 @@
-import {GraphQLObjectType, GraphQLObjectTypeConfig, GraphQLString} from "graphql";
-import {Film} from "../models/Film";
+import {GraphQLInt, GraphQLNonNull, GraphQLObjectType, GraphQLString} from "graphql";
 
-export class FilmType extends GraphQLObjectType {
-
-	private static readonly type: GraphQLObjectTypeConfig<Film, any> = {
-		description: "A single film.",
-		fields: {
-			title: {
-				description: "The title of this film.",
-				type: GraphQLString,
-			},
+export default new GraphQLObjectType({
+	fields: () => ({
+		episode_id: {
+			description: "The Id",
+			type: new GraphQLNonNull(GraphQLInt),
 		},
-		name: "Film",
-	};
-
-	public constructor() {
-		super(FilmType.type);
-	}
-
-}
+		title: {
+			description: "The Title",
+			type: new GraphQLNonNull(GraphQLString),
+		},
+	}),
+	name: "Film",
+});
