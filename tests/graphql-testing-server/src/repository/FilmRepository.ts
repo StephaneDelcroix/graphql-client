@@ -6,13 +6,14 @@ export class FilmRepository {
 		return [
 			{
 				episode_id: 4,
+				id: 1,
 				title: "A New Hope",
 			},
 		];
 	}
 
 	public async getByIdAsync(id: number): Promise<Film> {
-		return (await this.getAllAsync())[0];
+		return (await this.getAllAsync())[id];
 	}
 
 }
